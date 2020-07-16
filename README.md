@@ -41,6 +41,25 @@ Anaconda (Python3.7)
 ## Deployment
 
 
+serverless data pipeline demployment demo
+
+sourced from https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707
+
+
+requires serverless and appropriately permissioned AWS roles
+
+these roles must be inserted into 'serverless.yml' in the ROLE and GLUE-ROLE fields
+
+deploy with 
+| sls deploy --stage <UNIQUE-IDENT>
+
+copy glue scripts into s3 with
+| aws s3 cp glue/ s3://serverless-data-pipeline-<UNIQUE-IDENT>-glue-scripts/ --recursive
+
+copy sample data with
+| aws s3 cp samples/ s3://serverless-data-pipeline-<UNIQUE-IDENT>/raw/ --recursive
+
+
 ### Dash
 
 

@@ -1,0 +1,16 @@
+{
+	"first_name": "danaerys",
+	"middle_name": null,
+	"last_name": "targareyn",
+	"blood_type": "fire",
+	"family": {
+			"children": [
+					"drogon"
+				]
+		},
+	"address": {
+			"zip_code": "12345",
+			"stn": "dragonstone"
+		},
+	"motto": "fire and blood"	
+}
