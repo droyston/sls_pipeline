@@ -7,11 +7,11 @@ provider:
   stage: ${opt:stage}
   # add your own lambda role ARN here
   role: arn:aws:iam::285556499664:role/mdp-sls-lambda
-  iamRoleStatements:
-    - Effect: Allow
-      Action: 
-        - 's3.*'
-      Resource: 'arn:aws:s3:::${self:service}-${self:provider.stage}/*'
+  #iamRoleStatements:
+  #  - Effect: "Allow"
+  #    Action: 
+  #      - "s3.*"
+  #    Resource: "arn:aws:s3:::${self:custom.bucket_raw}/*"
 
 plugins: serverless-s3-remover
 
@@ -29,19 +29,15 @@ custom:
       - ${self:custom.bucket}
       #- ${self:custom.bucket_glue_scripts}
   #corsConfig: true
-
-   	
       
 functions:
-  upload:
-    handler: lambda/upload.handler
-    events:
-      - http: 
-          path: /upload_to_s3
-          method: put
-    environment:
-        DEST_BUCKET: ${self:custom.bucket}
-        DEST_KEY: raw/
+  #requestUploadURL:
+  #  handler: lambda/upload.handler
+  #  events:
+  #  -  http:
+  #  	  path: requestUploadURL
+  #  	  method: post
+  #  	  cors: ${self:custom.corsConfig}
   
   extract:
     handler: lambda/extract.handler

@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jul 15 17:16:46 2020
+
+@author: dylanroyston
+"""
+
 import os
 import boto3
 
@@ -5,7 +13,7 @@ import boto3
 def handler(event, context):
     """
     trigger the glue crawler that creates a data catalog
-    from the extracted contents of the emails.
+    from the extracted contents of the jsons.
     """
     # get glue crawler name from the environment
     glue_crawler = os.getenv('GLUE_CRAWLER')

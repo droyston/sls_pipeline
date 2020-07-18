@@ -9,15 +9,16 @@ Created on Wed Jul 15 17:16:46 2020
 
 import json
 import os
-from email import policy
-from email.parser import BytesParser
+#from email import policy
+#from email.parser import BytesParser
+from datetime import datetime as dt
 
 import boto3
 
 
 def handler(event, context):
     """
-    extract the contents from the emails and
+    extract the contents from the jsons and
     put the resulting object back to s3.
     """
     # get the source key and bucket from
@@ -30,51 +31,80 @@ def handler(event, context):
     destination_bucket = os.getenv('DEST_BUCKET')
     destination_key = os.getenv('DEST_KEY')
 
-    # get the email name from the key
-    email_name = source_key.split('/')[-1]
+    # get the json name from the key
+    source_name = source_key.split('/')[-1]
 
-    # get email from s3, extract the contents
+    # get json from s3, extract the contents
     # and dump the result back to s3
     s3_client = boto3.client('s3')
     s3_object = s3_client.get_object(Bucket=source_bucket,
-                                     Key=source_key)["Body"].read()
+                                     Key=source_key)["Body"].read().decode('utf-8')
+    
+    source_raw = json.loads(s3_object)
 
-    email_object = extract_contents(s3_object, email_name)
+    # retrieve target data from source
+    source_object = extract_contents(source_raw, source_name)
 
-    full_s3_key = destination_key + email_name + '.json'
-    s3_client.put_object(Body=email_object,
+    full_s3_key = destination_key + source_name + '_extract.json'
+    s3_client.put_object(Body=source_object,
                          Bucket=destination_bucket,
                          Key=full_s3_key)
 
 
-def get_address_from_email(email_object, field):
-    if email_object[field]:
-        return email_object[field].addresses[0].addr_spec
-    return ''
+## secondary functions
+
+def recursive_items(dictionary):
+    for key, value in dictionary.items():
+        if type(value) is dict:
+            yield (key, value)
+            yield from recursive_items(value)
+        else:
+            yield (key, value)
+        
+
+def extract_contents(message_object, obj_name):
+        
+    message_data = json.loads(message_object)
+
+    # extract all keys in object
+    all_keys = ['id']
+    all_vals = [obj_name]
+    
+    for key, value in recursive_items(message_data):
+        all_keys.append(key)
+        all_vals.append(value)
+        
+    # search for and extract target key/values, returning 400 if null/missing
+    target_keys = ['first_name', 'middle_name', 'last_name', 'zip_code']
+    target_vals = []
+    
+    for k in target_keys:
+        if k in all_keys:
+            return_val = all_vals[all_keys.index(k)]
+        else:
+            return_val = '400'
+        target_vals.append(return_val)
+        
+        if None in target_vals:
+            repl = target_vals.index(None)
+            target_vals[repl] = '400'
+    
+    # append list of all source keys for follow-up
+    target_keys.append('source_keys')
+    target_vals.append(all_keys)
+    
+    # append date of processing for follow-up
+    currD = str(dt.date(dt.now()))
+    target_keys.append('load_date')
+    target_vals.append(currD)
+    
+    # convert target data to json
+    extract_dict = dict(zip(target_keys, target_vals))
+    extract_obj = json.dumps(extract_dict)
+
+    print('extracted object {}'.format(extract_obj))
+
+    return extract_obj
 
 
-def get_date_field_from_email(email_object):
-    if email_object['Date']:
-        return str(email_object['Date'].datetime)
-    return ''
 
-
-def extract_contents(message_object, email_name):
-    message_byte_object = BytesParser(policy=policy.default) \
-        .parsebytes(message_object)
-
-    email_object = {
-    'id': email_name,
-    'from': get_address_from_email(message_byte_object, 'From'),
-    'to': get_address_from_email(message_byte_object, 'To'),
-    'cc': get_address_from_email(message_byte_object, 'CC'),
-    'subject': str(message_byte_object['subject']),
-    'date': get_date_field_from_email(message_byte_object),
-    'body': message_byte_object
-        .get_body(preferencelist='plain')
-        .get_content()
-    }
-
-    print('email object {}'.format(email_object))
-
-    return json.dumps(email_object)

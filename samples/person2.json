@@ -1,0 +1,16 @@
+{
+	"first_name": "john",
+	"middle_name": "targeryen",
+	"last_name": "snow",
+	"blood_type": "ice",
+	"family": {
+			"children": [
+					""
+				]
+		},
+	"address": {
+			"zip_code": "23456",
+			"stn": "winterfell"
+		},
+	"motto": "winter is coming"	
+}

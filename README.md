@@ -59,6 +59,9 @@ copy glue scripts into s3 with
 copy sample data with
 | aws s3 cp samples/ s3://serverless-data-pipeline-<UNIQUE-IDENT>/raw/ --recursive
 
+send json-upload request through api
+| curl https://xxxxxx.execute-api.us-east-1.amazonaws.com/dev/s3 -d samples/person1 -H 'Content-Type:application/json'
+
 
 ### Dash
 
