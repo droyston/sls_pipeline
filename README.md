@@ -63,7 +63,6 @@ This project was developed by Dylan Royston ([LinkedIn Profile](https://www.link
 
 ## References
 
-Inspired by [Towards Data Science](https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707)
 
 
 
