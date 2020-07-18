@@ -40,24 +40,24 @@ Data flow:
 
 ## Deployment
 
-Pipeline is deployed using [Serverless)(https://www.serverless.com/) framework
-'''
+Pipeline is deployed using [Serverless](https://www.serverless.com/) framework
+```bash
 npm install -g serverless
-'''
+```
 
 Requires appropriately permissioned AWS roles, which need to be inserted into 'serverless.yml' in the ROLE and GLUE-ROLE fields
 
 deploy with 
-'''
+```
 sls deploy --stage <UNIQUE-IDENT>
-'''
+```
 
 Send PUT commands with [Postman](https://www.postman.com/)
 
 
 ## Credits
 
-This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/))as a take-home technical challenge for ([Manifold.AI](https://www.manifold.ai/manifold))
+This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/)) as a take-home technical challenge for [Manifold.AI](https://www.manifold.ai/manifold)
 
 ## References
 
