@@ -17,18 +17,13 @@ plugins: serverless-s3-remover
 
 custom:
   bucket: ${self:service}-${self:provider.stage}
-  #bucket_glue_scripts: ${self:custom.bucket}-glue-scripts
   glue_crawler: load-${self:provider.stage}
-  #glue_job: unzip-${self:provider.stage}
-  #glue_job_script_location: s3://${self:custom.bucket_glue_scripts}/unzip.py
   # add your own glue role ARN here
   glue_role: arn:aws:iam::285556499664:role/mdp-sls-glue
   athena_db: ${self:custom.bucket}
   remover:
     buckets:
       - ${self:custom.bucket}
-      #- ${self:custom.bucket_glue_scripts}
-  #corsConfig: true
 
    	
       
@@ -71,22 +66,6 @@ functions:
 resources:
   Resources:
           
-    #UploadBucket:
-    #  Type: AWS::S3::Bucket
-    #  Properties:
-    #  	BucketName: '${self:service}-${self:custom.bucket}-raw'
-    #  	AccessControl: Private
-    #  	CorsConfiguration:
-    #  	CorsRules:
-    #  	- AllowedHeaders: ['*']
-    #  	  AllowedMethods: ['PUT', 'POST']
-    #  	  AllowedOrigins: ['*']
-
-    #S3GlueScripts:
-    #  Type: AWS::S3::Bucket
-    #  Properties:
-    #    BucketName: ${self:custom.bucket_glue_scripts}
-
     GlueCrawler:
       Type: AWS::Glue::Crawler
       Properties:

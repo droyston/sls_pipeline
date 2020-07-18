@@ -9,8 +9,6 @@ Created on Wed Jul 15 17:16:46 2020
 
 import json
 import os
-#from email import policy
-#from email.parser import BytesParser
 from datetime import datetime as dt
 
 import boto3
@@ -44,9 +42,12 @@ def handler(event, context):
 
     # retrieve target data from source
     source_object = extract_contents(source_raw, source_name)
-
-    full_s3_key = destination_key + source_name + '_extract.json'
-    s3_client.put_object(Body=source_object,
+    
+    procD = source_object['load_date']
+    source_out = json.dumps(source_object)
+    full_s3_key = destination_key + source_name + '_' + str(procD) + '_extract.json'
+    
+    s3_client.put_object(Body=source_out,
                          Bucket=destination_bucket,
                          Key=full_s3_key)
 
@@ -100,11 +101,9 @@ def extract_contents(message_object, obj_name):
     
     # convert target data to json
     extract_dict = dict(zip(target_keys, target_vals))
-    extract_obj = json.dumps(extract_dict)
 
-    print('extracted object {}'.format(extract_obj))
 
-    return extract_obj
+    return extract_dict
 
 
 
