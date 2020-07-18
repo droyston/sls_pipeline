@@ -47,10 +47,12 @@ npm install -g serverless
 
 Requires appropriately permissioned AWS roles, which need to be inserted into 'serverless.yml' in the ROLE and GLUE-ROLE fields
 
-deploy with 
+Deploy pipeline with:
 ```
 sls deploy --stage <UNIQUE-IDENT>
 ```
+CLI will return endpoint URL for PUT commands
+
 
 Send PUT commands with [Postman](https://www.postman.com/)
 
@@ -61,7 +63,7 @@ This project was developed by Dylan Royston ([LinkedIn Profile](https://www.link
 
 ## References
 
-inspired by [Towards Data Science](https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707)
+Inspired by [Towards Data Science](https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707)
 
 
 
