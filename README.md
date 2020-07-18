@@ -40,7 +40,7 @@ Data flow:
 
 ## Deployment
 
-Pipeline is deployed using ([Serverless)(https://www.serverless.com/)) framework
+Pipeline is deployed using [Serverless)(https://www.serverless.com/) framework
 '''
 npm install -g serverless
 '''
@@ -52,16 +52,16 @@ deploy with
 sls deploy --stage <UNIQUE-IDENT>
 '''
 
-Send PUT commands with ([Postman](https://www.postman.com/))
+Send PUT commands with [Postman](https://www.postman.com/)
 
 
 ## Credits
 
-This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/)) as a take-home technical challenge for ([Manifold.AI](https://www.manifold.ai/manifold))
+This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/))as a take-home technical challenge for ([Manifold.AI](https://www.manifold.ai/manifold))
 
 ## References
 
-inspired by ([this](https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707)) Towards Data Science article
+inspired by [Towards Data Science](https://towardsdatascience.com/build-a-serverless-data-pipeline-on-aws-7c7d498d9707)
 
 
 
