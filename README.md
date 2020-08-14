@@ -1,5 +1,5 @@
-# mf_swe_test
-Takehome interview assignment
+# sls_pipeline
+A small example of serverless data pipeline deployment. 
 
 ## Table of Contents
 1. [Overview](#about)
@@ -11,7 +11,7 @@ Takehome interview assignment
 
 ## Overview
 
-Challenge: Deploy a serverless data pipeline to ingest and store JSON data in AWS
+Purpose: Deploy a serverless data pipeline to ingest and store JSON data in AWS
 
 ## Engineering Design
 
@@ -59,7 +59,7 @@ Send PUT commands with [Postman](https://www.postman.com/)
 
 ## Credits
 
-This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/)) as a take-home technical challenge for [Manifold.AI](https://www.manifold.ai/manifold)
+This project was developed by Dylan Royston ([LinkedIn Profile](https://www.linkedin.com/in/dylanroyston/)).
 
 ## References
 
