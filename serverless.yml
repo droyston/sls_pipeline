@@ -24,7 +24,7 @@ custom:
   remover:
     buckets:
       - ${self:custom.bucket}
-
+    
    	
       
 functions:
