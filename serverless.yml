@@ -6,7 +6,7 @@ provider:
   runtime: python3.7
   stage: ${opt:stage}
   # add your own lambda role ARN here
-  role: arn:aws:iam::285556499664:role/mdp-sls-lambda
+  role: <YOUR_LAMBDA_ROLE>
   iamRoleStatements:
     - Effect: Allow
       Action: 
@@ -19,7 +19,7 @@ custom:
   bucket: ${self:service}-${self:provider.stage}
   glue_crawler: load-${self:provider.stage}
   # add your own glue role ARN here
-  glue_role: arn:aws:iam::285556499664:role/mdp-sls-glue
+  glue_role: <YOUR_GLUE_ROLE>
   athena_db: ${self:custom.bucket}
   remover:
     buckets:
