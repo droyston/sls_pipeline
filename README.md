@@ -1,6 +1,8 @@
 # sls_pipeline
 A small example of serverless data pipeline deployment. 
 
+Extended readme available [here](https://docs.google.com/presentation/d/1AGS5j3PZZ_5Xze2w_d5ZxiCax1kUe3gfNuGo8-gHkjY/edit?usp=sharing)
+
 ## Table of Contents
 1. [Overview](#about)
 2. [Engineering Design](#engineering-design)
